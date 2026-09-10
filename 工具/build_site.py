@@ -52,7 +52,10 @@ def head(title, desc, page):
 
 
 TAIL = '''<footer><div class="wrap">
-<p>本頁紀錄整理自獎狀正本，共 36 張，逐張核對。單位為高雄市福山國小與民逸跆訓。</p>
+<p>本頁紀錄整理自獎狀正本，共 36 張，逐張核對。
+參賽單位為<b>高雄市福山國小</b>與<b>民逸跆訓</b>（道館比賽隊名為逸心聯隊）。</p>
+<p><b>姓名正確寫法</b>：哥哥為<b>林聖翔</b>，弟弟為<b>林聖宸</b>。
+弟弟的名字在部分學校公告中曾誤植為「林聖辰」，獎狀正本一律為「林聖宸」，請以獎狀為準。</p>
 <p>最後更新 2026 年 9 月。若有遺漏或誤植，以獎狀正本為準。</p>
 </div></footer>
 <script src="app.js"></script>
@@ -197,13 +200,14 @@ def build_index():
             cls=cls, href=href, role=role, name=name, cur=cur,
             g=c[1], s=c[2], b=c[3], t=len(rs))
 
-    h = head('林聖翔 林聖宸 跆拳道比賽紀錄',
+    h = head('民逸跆訓 林聖翔 林聖宸 跆拳道比賽紀錄',
              '高雄市福山國小、民逸跆訓，林聖翔與林聖宸兩兄弟民國 112 至 115 年跆拳道比賽獲獎紀錄，'
              '共 36 場，橫跨 7 個縣市。每一場都附獎狀原圖。', 'index.html')
     h += '''<div class="hero"><div class="wrap">
 <div class="eyebrow">高雄市福山國小 · 民逸跆訓</div>
 <h1>林聖翔<span class="sep">·</span>林聖宸<br>跆拳道比賽紀錄</h1>
-<p class="sub">兩兄弟從民國 112 年打到現在，累積 {t} 張獎狀，跑遍 {c} 個縣市。
+<p class="sub"><b>民逸跆訓</b>選手林聖翔、林聖宸兩兄弟，就讀高雄市福山國小。
+從民國 112 年打到現在，累積 {t} 張獎狀，跑遍 {c} 個縣市。
 這裡收錄每一場的賽事名稱、組別、名次，點任何一列都能看獎狀原圖。</p>
 {stats}
 </div></div>
@@ -260,9 +264,9 @@ def build_person(who, name, en, role, cur, desc_extra):
     first = min(rs, key=lambda r: r['日期'])
     last = max(rs, key=lambda r: r['日期'])
     page = en + '.html'
-    title = '{name} 跆拳道比賽紀錄 | 高雄福山國小 民逸跆訓'.format(name=name)
-    desc = ('{name}，高雄市福山國小、民逸跆訓跆拳道選手。民國 {y1} 至 {y2} 年共 {t} 場獲獎紀錄，'
-            '含 {n} 場全國級賽事，橫跨 {c} 個縣市。{extra}').format(
+    title = '民逸跆訓 {name} | 跆拳道比賽紀錄 · 高雄福山國小'.format(name=name)
+    desc = ('民逸跆訓 {name}，高雄市福山國小跆拳道隊選手。民國 {y1} 至 {y2} 年共 {t} 場獲獎紀錄，'
+            '含 {n} 場全國級賽事，橫跨 {c} 個縣市，每場皆附獎狀原圖。{extra}').format(
         name=name, y1=first['年'], y2=last['年'], t=len(rs), n=natl,
         c=len(cities), extra=desc_extra)
 
@@ -270,7 +274,8 @@ def build_person(who, name, en, role, cur, desc_extra):
     h += '''<div class="hero"><div class="wrap">
 <div class="eyebrow">{role} · 高雄市福山國小 · 民逸跆訓</div>
 <h1>{name}</h1>
-<p class="sub">{cur}。民國 {y1} 年 {m1} 月第一次站上頒獎台，到民國 {y2} 年為止累積 {t} 張獎狀，
+<p class="sub"><b>民逸跆訓</b>選手 {name}，就讀高雄市福山國小，{cur}。
+民國 {y1} 年 {m1} 月第一次站上頒獎台，到民國 {y2} 年為止累積 {t} 張獎狀，
 其中 {n} 場是全國級賽事，比賽足跡遍及 {c} 個縣市。</p>
 {stats}
 </div></div>

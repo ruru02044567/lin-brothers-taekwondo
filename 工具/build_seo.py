@@ -50,13 +50,16 @@ def person_ld(who, name, page):
         "nationality": {"@type": "Country", "name": "臺灣"},
         "jobTitle": "跆拳道選手",
         "affiliation": [
-            {"@type": "SportsTeam", "name": "高雄市福山國小跆拳道隊"},
-            {"@type": "SportsOrganization", "name": "民逸跆訓"},
+            {"@type": "SportsOrganization", "name": "民逸跆訓",
+             "alternateName": "逸心聯隊", "sport": "跆拳道",
+             "areaServed": {"@type": "City", "name": "高雄市"}},
+            {"@type": "SportsTeam", "name": "高雄市福山國小跆拳道隊", "sport": "跆拳道"},
         ],
         "memberOf": {"@type": "EducationalOrganization", "name": "高雄市立福山國民小學"},
-        "knowsAbout": ["跆拳道", "對打", "品勢", "Taekwondo"],
+        "knowsAbout": ["跆拳道", "對打", "品勢", "競技對打", "Taekwondo"],
+        "alternateName": ["民逸跆訓 " + name],
         "award": awards,
-        "description": "%s，高雄市福山國小、民逸跆訓跆拳道選手。共 %d 場獲獎紀錄，其中 %d 次第一名。"
+        "description": "民逸跆訓 %s，高雄市福山國小跆拳道隊選手。共 %d 場獲獎紀錄，其中 %d 次第一名。"
                        % (name, len(rs), golds),
     }
     return json.dumps(obj, ensure_ascii=False, indent=None)
@@ -72,7 +75,11 @@ def site_ld():
         "about": [
             {"@type": "Person", "name": "林聖翔"},
             {"@type": "Person", "name": "林聖宸"},
+            {"@type": "SportsOrganization", "name": "民逸跆訓",
+             "alternateName": "逸心聯隊", "sport": "跆拳道",
+             "areaServed": {"@type": "City", "name": "高雄市"}},
         ],
+        "keywords": "民逸跆訓, 逸心聯隊, 林聖翔, 林聖宸, 福山國小, 高雄跆拳道, 跆拳道比賽紀錄",
         "description": "高雄市福山國小、民逸跆訓，林聖翔與林聖宸兩兄弟民國 112 至 115 年跆拳道比賽獲獎紀錄，"
                        "共 36 場，橫跨 7 個縣市，每一場都附獎狀原圖。",
     }
