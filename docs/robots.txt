@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ruru02044567.github.io/lin-brothers-taekwondo/sitemap.xml

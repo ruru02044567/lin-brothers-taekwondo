@@ -173,14 +173,13 @@ select{
 .lb-cap .d{font-size:.87rem;color:var(--ink2);margin-top:5px}
 .lb-close{
   position:fixed;top:14px;right:18px;z-index:110;
-  background:var(--surface);
-  background:none;border:1px solid var(--line2);color:var(--ink2);
+  background:var(--surface);border:1px solid var(--line2);color:var(--ink2);
   width:38px;height:38px;border-radius:2px;font-size:1.2rem;cursor:pointer;
 }
 .lb-close:hover{color:var(--ink);border-color:var(--ink3)}
 .lb-nav{
-  position:fixed;z-index:110;background:var(--surface);top:50%;transform:translateY(-50%);
-  background:none;border:1px solid var(--line2);color:var(--ink2);
+  position:fixed;z-index:110;top:50%;transform:translateY(-50%);
+  background:var(--surface);border:1px solid var(--line2);color:var(--ink2);
   width:40px;height:56px;border-radius:2px;font-size:1.3rem;cursor:pointer;
 }
 .lb-nav:hover{color:var(--ink)}

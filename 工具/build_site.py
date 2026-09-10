@@ -3,9 +3,11 @@
 資料來源：獎狀資料.json（由 36 張獎狀照片逐張讀出）
 輸出：site/index.html、site/lin-sheng-xiang.html、site/lin-sheng-chen.html
 """
-import json, io, os, collections
+import json, io, os, sys, collections
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(ROOT, 'docs'))
+import _charts
 D = json.load(io.open(os.path.join(ROOT, '獎狀資料.json'), encoding='utf-8'))
 REC = D['獎狀']
 
@@ -212,15 +214,27 @@ def build_index():
 </div></section>
 
 <section><div class="wrap">
-<div class="sec-head"><h2>四年的軌跡</h2><span class="hint">滑鼠移到點上看該場賽事</span></div>
-<div class="fig">{svg}</div>
+<div class="sec-head"><h2>越打越強</h2><span class="hint">一個方塊代表一面獎牌</span></div>
+<div class="fig">{ladder}</div>
 <div class="legend">
 <span><i style="background:var(--gold)"></i>第一名</span>
 <span><i style="background:var(--silver)"></i>第二名</span>
 <span><i style="background:var(--bronze)"></i>第三名</span>
 <span><i style="background:var(--ink3)"></i>第四名</span>
 </div>
-<p class="figcap">上排是哥哥林聖翔，下排是弟弟林聖宸。點的位置依實際比賽日期排列。</p>
+<p class="figcap">哥哥前兩年七戰無金，114 年四場全拿第一，隔年升上黑帶。
+弟弟 115 年九場比賽拿下六個第一。下方色帶是腰帶進程。</p>
+</div></section>
+
+<section><div class="wrap">
+<div class="sec-head"><h2>跑了七個縣市</h2><span class="hint">由北到南排列</span></div>
+<div class="fig">{citymap}</div>
+<div class="legend">
+<span><i style="background:var(--hong)"></i>林聖翔</span>
+<span><i style="background:var(--chung)"></i>林聖宸</span>
+</div>
+<p class="figcap">主場在高雄，但為了比賽從屏東潮州一路跑到新北、新竹竹東、苗栗。
+最下面那列是中華民國跆拳道協會與 9 段協會主辦的全國賽，沒有固定縣市。</p>
 </div></section>
 
 <section><div class="wrap">
@@ -234,7 +248,7 @@ def build_index():
            stats=stat_block(REC, extra=[(natl, '全國級賽事'), (len(cities), '個縣市')]),
            cards=card('h', '哥哥', '林聖翔', 'lin-sheng-xiang.html', xiang, '黑帶 · 37 公斤級')
                  + card('c', '弟弟', '林聖宸', 'lin-sheng-chen.html', chen, '色帶 · 34 公斤級'),
-           svg=timeline_svg(), tools=tools_bar('兩兄弟'),
+           ladder=_charts.LADDER, citymap=_charts.CITYMAP, tools=tools_bar('兩兄弟'),
            items=render_items(REC), lb=LIGHTBOX)
     return h + TAIL
 
@@ -362,7 +376,7 @@ APP_JS = r'''// 搜尋、篩選、燈箱
 '''
 
 if __name__ == '__main__':
-    site = os.path.join(ROOT, 'site')
+    site = os.path.join(ROOT, 'docs')
     os.makedirs(site, exist_ok=True)
     io.open(os.path.join(site, 'index.html'), 'w', encoding='utf-8').write(build_index())
     io.open(os.path.join(site, 'lin-sheng-xiang.html'), 'w', encoding='utf-8').write(

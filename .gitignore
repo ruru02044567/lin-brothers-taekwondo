@@ -2,3 +2,5 @@
 _預覽/
 紀錄/
 工具/__pycache__/
+docs/__pycache__/
+docs/_charts.py

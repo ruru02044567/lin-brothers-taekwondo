@@ -173,14 +173,14 @@ select{
 .lb-cap .t{font-family:var(--serif);font-size:1.04rem;font-weight:700;line-height:1.45}
 .lb-cap .d{font-size:.87rem;color:var(--ink2);margin-top:5px}
 .lb-close{
-  position:absolute;top:18px;right:20px;
-  background:none;border:1px solid var(--line2);color:var(--ink2);
+  position:fixed;top:14px;right:18px;z-index:110;
+  background:var(--surface);border:1px solid var(--line2);color:var(--ink2);
   width:38px;height:38px;border-radius:2px;font-size:1.2rem;cursor:pointer;
 }
 .lb-close:hover{color:var(--ink);border-color:var(--ink3)}
 .lb-nav{
-  position:absolute;top:50%;transform:translateY(-50%);
-  background:none;border:1px solid var(--line2);color:var(--ink2);
+  position:fixed;z-index:110;top:50%;transform:translateY(-50%);
+  background:var(--surface);border:1px solid var(--line2);color:var(--ink2);
   width:40px;height:56px;border-radius:2px;font-size:1.3rem;cursor:pointer;
 }
 .lb-nav:hover{color:var(--ink)}
@@ -232,6 +232,6 @@ footer p{margin:0 0 8px;max-width:52em}
 }
 .note b{color:var(--ink);font-weight:700}
 """
-os.makedirs('site', exist_ok=True)
-io.open('site/style.css', 'w', encoding='utf-8').write(CSS)
+os.makedirs('docs', exist_ok=True)
+io.open('docs/style.css', 'w', encoding='utf-8').write(CSS)
 print('style.css OK', len(CSS))
