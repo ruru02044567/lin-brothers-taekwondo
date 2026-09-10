@@ -14,8 +14,52 @@
 
 GitHub repo：https://github.com/ruru02044567/lin-brothers-taekwondo （公開）
 
-**Google 收錄還沒完成**，要賢賢本人到 Search Console 送 sitemap，
-步驟寫在 `讓Google搜得到.md`。
+**Search Console 已設定完成**（驗證＋sitemap＋三頁索引請求都做完了），
+剩下等 Google 實際收錄，見下方進度區。
+
+## Search Console 進度（2026-09-10 21:5x 台北）
+
+**驗證擁有權：已完成 ✅**  帳號 ruru02044567@gmail.com，HTML 檔案驗證通過。
+
+**sitemap：已提交 ✅**  `/lin-brothers-taekwondo/sitemap.xml`
+狀態欄顯示「無法擷取」但「上次讀取時間」是空的 —— 這是 Google 還沒去抓的預設值，
+不是失敗。sitemap 本身實測 HTTP 200、三個網址格式正確。
+
+**索引請求：三頁全部受理 ✅**
+- index（總覽）
+- lin-sheng-xiang.html
+- lin-sheng-chen.html
+
+### 這輪踩到的四個坑（自動化 Search Console 必看）
+
+1. **`get_by_text('提交')` 會點到左下角的「提交意見」**，不是 sitemap 的提交鈕。
+   側邊會滑出「提供意見給 Google」面板蓋住畫面。
+   正解：抓輸入框座標，只點「同一列、在它右邊」的按鈕。
+
+2. **驗收不能用關鍵字**：頁面本來就有「sitemap.xml」這幾個字，
+   拿它當成功條件等於沒測。正解：讀表格的「共 N 列」。
+
+3. **只填 `sitemap.xml` 會被接到網域根目錄** → `github.io/sitemap.xml`（404）。
+   要填含資源路徑的 `lin-brothers-taekwondo/sitemap.xml`。
+   兩列都送了，錯的那列刪不掉但不影響。
+
+4. **索引請求會隨機跳「請稍後再試」**，重跑一次就過。要寫重試。
+
+### 相關腳本
+
+- `工具/probe_profiles.py` — 唯讀測各瀏覽器 profile 的登入狀態
+- `工具/gsc_confirm.py` — 唯讀查驗證與 sitemap 現況
+- `工具/gsc_sm_full.py` — 送 sitemap（已避開提交意見陷阱）
+- `工具/gsc_inspect.py` — 三頁網址審查＋請求索引
+- `工具/gsc_retry.py` — 單頁索引請求重試
+
+登入用的 profile 是 `~/.config/gsc-playwright`（已登入，headless 可直接用）。
+
+### 還沒完成的部分
+
+Google 實際收錄要等，**2 天到 4 週**，這是 Google 端的時間，本機沒有加速手段。
+驗收方式：Google 搜 `site:ruru02044567.github.io/lin-brothers-taekwondo`
+或跑 `python -X utf8 工具/check_indexed.py`。
 
 ## 這是什麼
 
