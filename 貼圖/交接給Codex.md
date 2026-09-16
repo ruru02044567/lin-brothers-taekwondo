@@ -13,7 +13,8 @@
 1. `貼圖\貼圖規劃.html` — 畫風規格、兩人區分、16 句文字、技術規格、身分證據。用瀏覽器開。
 2. `照片\_分類對照.png` — 25 張照片分類結果。
 3. `C:\Users\TUF Gaming\Desktop\小嘴 LINE 貼圖成品\32張總覽.png` — 畫風基準，照這個畫。同資料夾 `製作與檢查紀錄.json` 有切格座標與字級。
-4. 後製腳本：`C:\Users\TUF Gaming\Desktop\MiniMouth-Intro\LINE貼圖\build_full_pack.py`。9/14 的呼叫範例在 `C:\Users\TUF Gaming\Documents\Codex\2026-09-14\c-users-tuf-gaming-desktop-minimouth-2\work\build_final.py`（切格用連通區塊＋邊界中性色 flood fill，八格先依 y 再依 x 排序）。字型 `MiniMouth-Intro\LINE貼圖\fonts\NotoSansCJKtc-Bold.otf`。
+4. `C:\Users\TUF Gaming\Desktop\MiniMouth-Intro\LINE貼圖\CODEX接手說明.md` — 你 9/14 自己寫的接手說明；同資料夾 `貼圖劇本_32張.md`、`貼圖文案_32張.json` 是小嘴版的劇本與文案格式，這次照同樣格式寫兩份。
+5. 後製腳本：`C:\Users\TUF Gaming\Desktop\MiniMouth-Intro\LINE貼圖\build_full_pack.py`。9/14 的呼叫範例在 `C:\Users\TUF Gaming\Documents\Codex\2026-09-14\c-users-tuf-gaming-desktop-minimouth-2\work\build_final.py`（切格用連通區塊＋邊界中性色 flood fill，八格先依 y 再依 x 排序）。字型 `MiniMouth-Intro\LINE貼圖\fonts\NotoSansCJKtc-Bold.otf`。
 
 ## 參考照（上傳給 image_gen 用）
 
