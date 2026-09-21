@@ -1,6 +1,26 @@
 # 林家兄弟跆拳道 專案筆記
 
-最後更新：2026-09-16 13:05 台北
+最後更新：2026-09-20 10:10 台北
+
+## 2026-09-20 故事書（漫畫版）規劃中，等賢賢定樣子
+
+- **目標**：在爸爸的 Blogger（https://linsheng-xiang.blogspot.com/ ，Contempo 版型，側欄有「網頁」功能但目前零頁）裡開兩個網頁：哥哥、弟弟各一頁，日本熱血運動漫畫風（賢賢丟《テコンダー朴》封面當參考）。
+- **腳本圖**：https://claude.ai/artifact/N1Xvnx6ZmgMhnwvgm7FF1z （第 4 版：全彩、無黑白、照片對齊臉；哥哥頁、弟弟頁、入口橫幅）。產生器 `故事書\gen_v3.py`＋`故事書\v3_template.html`，在 scratchpad 跑（要 `inventory.json`、`stickers\`、`blogimg\`，後兩者可由 gen 流程重建）。
+- **已定案**：哥哥藍、弟弟紅（跟 9/16 貼圖）；故事文字由 Claude 寫；生活照可上網，但兩張證件照（翔 808053、宸 808052）不放；**黑白照片一律不用**（賢賢：不吉利）；先看樣子再做技術；架上去後可再改。
+- **9/20 10:40 賢賢：「其他都交給你」**。四題用預設：扉頁照第 5 版、弟弟黑帶格留「？」、主圖照現版、參考圖維持混搭。他唯一要做的是請爸爸把 ruru02044567@gmail.com 加成 Blogger 管理員（步驟已驗：設定→權限→邀請更多作者→傳送；接受後在名字旁選「管理員」；support.google.com/blogger/answer/42673）。給爸爸的訊息在桌面 `blogger-permission.txt`。
+- **權限到手前 Claude 可先做**：① 樣張改正式頁（去左側欄與 BOARD 框）② 圖片上 GitHub Pages `docs/story/`（生活照公開已授權，兩張證件照不放）③ 橫幅小工具 HTML。權限到手後：Blogger 開兩個網頁貼入、側欄勾選、手機驗收。
+- **生圖**：人臉的圖走 GPT。9/20 10:00 Codex image_gen 撞用量上限（9/21 07:45 重置）；本機 ComfyUI check-heavy=HOLD（可用 RAM 1.7 GB）且沒 insightface 做不了像本人。已給賢賢桌面 `manga-prompts.txt` 讓他用 ChatGPT 手動生 3 張，存到桌面 `林家兄弟貼圖-傳給爸爸\生圖樣張\`。
+- **貼圖最終版**：桌面 `林家兄弟貼圖-傳給爸爸\林家兄弟貼圖-各16張-解壓後上傳LINE.zip`（9/17 13:50，道具放大＋表情修正版，38 張雜湊全異於 9/16 交付包）。賢賢 9/20 指定只用這版，`貼圖\爸爸交付包` 那套是舊的不要用。編號與文字兩版相同。
+- **素材位置**：生活照 36 張在桌面 `林家兄弟貼圖-傳給爸爸\林家兄弟照片\`（翔 17／宸 16／合照 3）；獎狀 `docs\images`；貼圖 `貼圖\爸爸交付包`；爸爸部落格 3 篇＋11 張原圖（feed 可抓 s0 原尺寸）。
+- **未驗**：Blogger 網頁貼自訂 HTML 這步沒用爸爸帳號實測；9/19 台中大肚國小理事長盃還沒有獎狀資料。
+- **規則**：網站案固定流程（需求→樣子→素材→技術→驗收）寫在記憶 rules/website-workflow-see-before-build.md。
+- **2026-09-21 17:38 故事頁上線**（commit 12d2a22，連同 9/14、9/16 兩個未推的本機 commit 一起 push）。
+  - 線上：哥哥 https://ruru02044567.github.io/lin-brothers-taekwondo/story/xiang.html 、弟弟 https://ruru02044567.github.io/lin-brothers-taekwondo/story/chen.html （17:4x 兩頁 curl 都 200）；總覽導覽列多了「聖翔の物語」「聖宸の物語」。
+  - 產生器：`故事書\build_story.py`（在 scratchpad 跑，讀 gen_v3.py 的 XIANG／CHEN dict 當唯一來源；哥哥大格 pC 換成 s0 原尺寸）。圖片 `docs\story\img\` 46 檔 5.9 MB：照片 17（生活照 13＋合照 1＋部落格原圖 4，長邊 1200、JPEG 82）、貼圖 13（最終版 zip 原尺寸）、獎狀 16。證件照沒放、沒有 base64、沒有灰階照片（17 張 HSV 飽和度最低 0.089）。
+  - 給 Blogger 用（權限到手後）：入口橫幅 `docs\story\banner.html`（版面「HTML/JavaScript」小工具）、兩頁片段 `docs\story\blogger-xiang.html`、`blogger-chen.html`（「網頁」HTML 檢視；CSS 全帶 `#lb-story` 前綴、壓成單行、圖片走 GitHub Pages 完整網址）。線上網址同上路徑。
+  - 已驗：本機與線上 Playwright 手機 390 寬 scrollWidth＝390、22 張圖無壞連；桌機 1100／手機 390 截圖在 `故事書\_驗收\`（xiang-*、chen-*、live-*）；cv2 臉部偵測主角臉全在可見區；Blogger 片段在模擬干擾 CSS（img 加框、div 加 margin、b 取消粗體）下版面正常。
+  - 未驗：真正的 Blogger Contempo 版型沒貼過（沒權限）；Blogger 存檔時「Enter 換行」設定是否會動到片段（已預先壓成單行避開）；弟弟進化格「黑帶」貼圖仍是灰化＋「？」（9/20 賢賢用預設留的，不是照片）；獎狀縮圖也照規格縮到 1200，每頁約 3 MB 圖，手機第一次載會慢一點。
+
 
 ## 2026-09-16 LINE 貼圖（交接給 Codex）
 
@@ -9,7 +29,7 @@
 - **照片**：`照片\林聖翔\`14 張、`照片\林聖宸\`8 張、`照片\兩人合照\`3 張；分類依據獎狀名字＋品勢帶＋臉頰痣，對照圖 `照片\_分類對照.png`。
   賢賢原說道服特寫（807994）是弟弟，證據判定是哥哥，待他確認。**照片不進 git**（.gitignore 已擋）。
 - **規劃**：`貼圖\貼圖規劃.html`（畫風、兩人區分、16 句、規格、流程、風險）。
-- **交接**：`貼圖\交接給Codex.md`，白板任務 WB-008，負責 codex。生圖走 Codex 的 image_gen，後製沿用 `Desktop\MiniMouth-Intro\LINE貼圖uild_full_pack.py`。
+- **交接**：`貼圖\交接給Codex.md`，白板任務 WB-008，負責 codex。生圖走 Codex 的 image_gen，後製沿用 `Desktop\MiniMouth-Intro\LINE貼圖\build_full_pack.py`。
 - **待賢賢答**：分類有無錯、弟弟腰帶色（預設紅）、自家用或上架（預設自家用）、16 句要不要換、部落格是哪個。
 - **未驗**：提示詞一張沒生過；RAM 12:50 剩 1.96 GB。
 - 桌面 `林家兄弟照片` 是 `照片\` 的 junction 分身，給賢賢丟檔用。
