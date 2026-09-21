@@ -5,3 +5,7 @@ _預覽/
 docs/__pycache__/
 docs/_charts.py
 照片/
+
+# 故事書樣張含生活照 base64，不進 git
+故事書/*.html
+故事書/inventory.json
